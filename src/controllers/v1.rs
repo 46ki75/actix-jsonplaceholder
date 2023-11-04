@@ -1,4 +1,5 @@
 mod mock_controller;
+mod user_controller;
 use actix_web::{web, HttpResponse};
 use serde_json::json;
 
@@ -6,7 +7,8 @@ pub fn init_config(cfg: &mut web::ServiceConfig) {
     cfg.service(
         web::scope("/v1")
             .route("", web::get().to(get_v1))
-            .service(web::scope("/mock").configure(mock_controller::config)),
+            .service(web::scope("/mock").configure(mock_controller::config))
+            .service(web::scope("/user").configure(user_controller::config)),
     );
 }
 
